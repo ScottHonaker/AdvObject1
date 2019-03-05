@@ -33,7 +33,7 @@ public class Main extends JFrame {
     private String itemDate = "08/25/2018";
 
     /** Default dimension of the dialog. */
-    private final static Dimension DEFAULT_SIZE = new Dimension(1280, 720);
+    private final static Dimension DEFAULT_SIZE = new Dimension(400, 300);
 
     /** Special panel to display the watched item. */
     private ItemView itemView;
@@ -76,6 +76,7 @@ public class Main extends JFrame {
         //--
         //-- WRITE YOUR CODE HERE!
         //--
+
         showMessage("View clicked!");
     }
 

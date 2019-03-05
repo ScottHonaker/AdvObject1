@@ -11,13 +11,13 @@ import java.util.Random;
 
 public class Item {
 
-    private String itemName = "LED Monitor";
-    private String URL = "http://www.bestbuy.com/site/samsun-ue90-series-28-led-4k-uhd-moniotr-black/5484022.p?skuId=5484022";
-    private double maxPrice = 369.99;
-    private double minPrice = 61.67;
-    private double itemPrice = getRandomPrice();
-    private double itemChange = change();
-    private String itemDate = "08/25/2018";
+    private String itemName;// = "LED Monitor";
+    private String URL;// = "http://www.bestbuy.com/site/samsun-ue90-series-28-led-4k-uhd-moniotr-black/5484022.p?skuId=5484022";
+    private double maxPrice;// = 369.99;
+    private double minPrice;// = 61.67;
+    private double itemPrice;// = getRandomPrice();
+    private double itemChange;// = change();
+    private String itemDate;// = "08/25/2018";
 
     public Item(String itemName, String URL, double maxPrice, double minPrice, double itemPrice, double itemChange, String itemDate){
         this.itemName = itemName;

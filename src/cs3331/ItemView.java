@@ -66,17 +66,17 @@ public class ItemView extends JPanel {
         //--
         //-- WRITE YOUR CODE HERE!
         //--
-        int x = 20, y = 30;
+        int x = 20, y = 50;
         // g.drawImage(getImage("view.png"), x, y);
         g.drawString("Name: " + item.getItemName(), x, y);
         y += 20;
-        g.drawString("URL: ", x, y);
+        g.drawString("URL: " + item.getURL(), x, y);
         y += 20;
-        g.drawString("Price: ", x, y);
+        g.drawString("Price: " + item.getItemPrice(), x, y);
         y += 20;
-        g.drawString("Change: ", x, y);
+        g.drawString("Change: " + item.getItemChange(), x, y);
         y += 20;
-        g.drawString("Added: ", x, y);
+        g.drawString("Added: " + item.getItemDate(), x, y);
 
     }
 
