@@ -6,6 +6,8 @@ package cs3331;
  * CS 3331
  */
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Random;
 
 
@@ -18,13 +20,14 @@ public class Item {
     private double itemPrice;// = getRandomPrice();
     private double itemChange;// = change();
     private String itemDate;// = "08/25/2018";
+    private double previousPrice;
 
-    public Item(String itemName, String URL, double maxPrice, double minPrice, double itemPrice, double itemChange, String itemDate){
+    public Item(String itemName, String URL, double maxPrice, double minPrice, double itemChange, String itemDate){
         this.itemName = itemName;
         this.URL = URL;
         this.maxPrice = maxPrice;
         this.minPrice = minPrice;
-        this.itemPrice = itemPrice;
+        this.itemPrice = getRandomPrice();
         this.itemChange = itemChange;
         this.itemDate = itemDate;
     }
@@ -85,18 +88,20 @@ public class Item {
         this.itemDate = itemDate;
     }
 
+    public void setPreviousPrice(double prevPrice){ this.previousPrice = prevPrice; }
+
     public double getRandomPrice(){
         Random ran = new Random();
-        return ran.doubles(minPrice, (maxPrice + 1)).findFirst().getAsDouble();
+        return (new BigDecimal(ran.doubles(minPrice, (maxPrice + 1)).findFirst().getAsDouble())
+                .setScale(2,RoundingMode.CEILING).doubleValue());
     }
 
 
     public double change(){
-        double increase = maxPrice - itemPrice;
-        double percentage = (increase / maxPrice) * 100;
-
+        double increase = itemPrice - previousPrice;
+        BigDecimal testPercentage = new BigDecimal(increase / previousPrice * 100);
+        double percentage = testPercentage.setScale(2, RoundingMode.CEILING).doubleValue();
         return percentage;
-
     }
 
 }

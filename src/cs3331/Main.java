@@ -28,7 +28,6 @@ public class Main extends JFrame {
     private String URL = "http://www.bestbuy.com/site/samsun-ue90-series-28-led-4k-uhd-moniotr-black/5484022.p?skuId=5484022";
     private double maxPrice = 369.99;
     private double minPrice = 61.67;
-    private double itemPrice = 300.0;
     private double itemChange = 0.0;
     private String itemDate = "08/25/2018";
 
@@ -50,7 +49,7 @@ public class Main extends JFrame {
     public Main(Dimension dim) {
         super("Price Watcher");
         setSize(dim);
-        this.item = new Item(itemName,URL,maxPrice,minPrice,itemPrice,itemChange,itemDate);
+        this.item = new Item(itemName,URL,maxPrice,minPrice,itemChange,itemDate);
         configureUI();
         //setLocationRelativeTo(null);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -66,6 +65,12 @@ public class Main extends JFrame {
         //--
         //-- WRITE YOUR CODE HERE!
         //--
+        item.setPreviousPrice(item.getItemPrice());
+        item.setItemPrice(item.getRandomPrice());
+        item.setItemChange(item.change());
+
+        item.getItemChange();
+        super.repaint();
         showMessage("Refresh clicked!");
     }
 
