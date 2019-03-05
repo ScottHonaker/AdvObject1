@@ -108,7 +108,11 @@ public class Main extends JFrame {
         return panel;
     }
 
-    /** Show briefly the given string in the message bar. */
+
+    /**
+     * Show briefly the given string in the message bar.
+     * @param msg
+     */
     private void showMessage(String msg) {
         msgBar.setText(msg);
         new Thread(() -> {
