@@ -7,12 +7,15 @@ import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.Desktop;
 import java.io.IOException;
 import java.net.URL;
 
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
+import java.net.URI;
+
 
 /** A special panel to display the detail of an item. */
 
@@ -62,10 +65,6 @@ public class ItemView extends JPanel {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         //Dimension dim = getSize();
-
-        //--
-        //-- WRITE YOUR CODE HERE!
-        //--
         int x = 20, y = 50;
         // g.drawImage(getImage("view.png"), x, y);
         g.drawString("Name: " + item.getItemName(), x, y);
@@ -74,10 +73,17 @@ public class ItemView extends JPanel {
         y += 20;
         g.drawString("Price: " + item.getItemPrice(), x, y);
         y += 20;
-        g.drawString("Change: " + item.getItemChange(), x, y);
+        if(item.getItemChange() > 0) {
+            g.setColor(Color.GREEN);
+            g.drawString("Change: " + item.getItemChange(), x, y);
+        } else{
+            g.setColor(Color.RED);
+            g.drawString("Change: " + item.getItemChange(), x, y);
+        }
+        g.setColor(Color.BLACK);
         y += 20;
         g.drawString("Added: " + item.getItemDate(), x, y);
-
+        g.drawImage(getImage("image/click.jpg"), 40, 60, this);
     }
 
     /** Return true if the given screen coordinate is inside the viewPage icon. */
@@ -85,7 +91,14 @@ public class ItemView extends JPanel {
         //--
         //-- WRITE YOUR CODE HERE
         //--
+        try{
+            Desktop d = Desktop.getDesktop();
+            d.browse(new URI(item.getURL()));
+        }catch(Exception e){
+            e.printStackTrace();
+        }
         return new Rectangle(20, 20, 30, 20).contains(x,  y);
+
     }
 
     /** Return the image stored in the given file. */
