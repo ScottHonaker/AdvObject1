@@ -79,26 +79,26 @@ public class ItemView extends JPanel {
     @Override
     public void paintComponent(Graphics g) {
         item = new Item(itemName,URL,maxPrice,minPrice,itemChange,itemDate);
+        double change = item.getItemChange();
         int height = 25;
         int width = 25;
         super.paintComponent(g);
-        //Dimension dim = getSize();
         g.drawImage(getImage("click.jpg"), 20, 5, height,width,null);
         int x = 20, y = 50;
-        // g.drawImage(getImage("view.png"), x, y);
         g.drawString("Name: " + item.getItemName(), x, y);
         y += 20;
         g.drawString("URL: " + item.getURL(), x, y);
         y += 20;
         g.drawString("Price: " + item.getItemPrice(), x, y);
         y += 20;
-        if(item.getItemChange() > 0) {
+        g.drawString("change: " + change, x, y);
+        /*if(change > 0.00) {
             g.setColor(Color.GREEN);
-            g.drawString("Change: " + item.getItemChange(), x, y);
+            g.drawString("Change: " + change, x, y);
         } else{
             g.setColor(Color.RED);
-            g.drawString("Change: " + item.getItemChange(), x, y);
-        }
+            g.drawString("Change: " + change, x, y);
+        }*/
         g.setColor(Color.BLACK);
         y += 20;
         g.drawString("Added: " + item.getItemDate(), x, y);

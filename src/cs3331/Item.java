@@ -76,8 +76,8 @@ public class Item {
         return itemChange;
     }
 
-    public void setItemChange(double itemChange) {
-        this.itemChange = itemChange;
+    public void setItemChange() {
+        this.itemChange = change();
     }
 
     public String getItemDate() {
@@ -99,9 +99,8 @@ public class Item {
 
     public double change(){
         double increase = itemPrice - previousPrice;
-        BigDecimal testPercentage = new BigDecimal(increase / previousPrice * 100);
-        double percentage = testPercentage.setScale(2, RoundingMode.CEILING).doubleValue();
-        return percentage;
+        double percentage = increase / previousPrice * 100;
+        return (new BigDecimal(percentage).setScale(2, RoundingMode.CEILING).doubleValue());
     }
 
 }

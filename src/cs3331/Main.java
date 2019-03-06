@@ -55,7 +55,7 @@ public class Main extends JFrame {
         //--
         itemView.getItem().setPreviousPrice(itemView.getItem().getItemPrice());
         itemView.getItem().setItemPrice(itemView.getItem().getRandomPrice());
-        itemView.getItem().setItemChange(itemView.getItem().change());
+        itemView.getItem().setItemChange();
         super.repaint();
         showMessage("Refresh clicked!");
     }
