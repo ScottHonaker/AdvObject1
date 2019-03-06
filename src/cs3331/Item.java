@@ -22,13 +22,13 @@ public class Item {
     private String itemDate;// = "08/25/2018";
     private double previousPrice;
 
-    public Item(String itemName, String URL, double maxPrice, double minPrice, double itemChange, String itemDate){
+    public Item(String itemName, String URL, double maxPrice, double minPrice, String itemDate){
         this.itemName = itemName;
         this.URL = URL;
         this.maxPrice = maxPrice;
         this.minPrice = minPrice;
         this.itemPrice = getRandomPrice();
-        this.itemChange = itemChange;
+        this.itemChange = 0;
         this.itemDate = itemDate;
     }
 
@@ -98,9 +98,9 @@ public class Item {
 
 
     public double change(){
-        double increase = itemPrice - previousPrice;
-        double percentage = increase / previousPrice * 100;
-        return (new BigDecimal(percentage).setScale(2, RoundingMode.CEILING).doubleValue());
+        //double increase = ((itemPrice - previousPrice)/ previousPrice) * 100;
+        return (new BigDecimal(((itemPrice - previousPrice)/ previousPrice) * 100)
+                .setScale(2, RoundingMode.CEILING).doubleValue());
     }
 
 }

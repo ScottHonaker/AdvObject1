@@ -22,14 +22,14 @@ import java.net.URI;
 @SuppressWarnings("serial")
 public class ItemView extends JPanel {
 
-    private Item item;
-
     private String itemName = "LED Monitor";
     private String URL = "http://www.bestbuy.com/site/samsun-ue90-series-28-led-4k-uhd-moniotr-black/5484022.p?skuId=5484022";
     private double maxPrice = 369.99;
     private double minPrice = 61.67;
-    private double itemChange = 0.0;
+    private double itemChange;
     private String itemDate = "08/25/2018";
+
+    private Item item = new Item(itemName,URL,maxPrice,minPrice,itemDate);
 
     public Item getItem() {
         return item;
@@ -78,8 +78,6 @@ public class ItemView extends JPanel {
     /** Overridden here to display the details of the item. */
     @Override
     public void paintComponent(Graphics g) {
-        item = new Item(itemName,URL,maxPrice,minPrice,itemChange,itemDate);
-        double change = item.getItemChange();
         int height = 25;
         int width = 25;
         super.paintComponent(g);
@@ -91,14 +89,13 @@ public class ItemView extends JPanel {
         y += 20;
         g.drawString("Price: " + item.getItemPrice(), x, y);
         y += 20;
-        g.drawString("change: " + change, x, y);
-        /*if(change > 0.00) {
+        if(item.getItemChange() > 0.00) {
             g.setColor(Color.GREEN);
-            g.drawString("Change: " + change, x, y);
+            g.drawString("Change: " + item.getItemChange(), x, y);
         } else{
             g.setColor(Color.RED);
-            g.drawString("Change: " + change, x, y);
-        }*/
+            g.drawString("Change: " + item.getItemChange(), x, y);
+        }
         g.setColor(Color.BLACK);
         y += 20;
         g.drawString("Added: " + item.getItemDate(), x, y);
