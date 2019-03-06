@@ -1,11 +1,8 @@
 package cs3331;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.net.URI;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -21,15 +18,6 @@ import javax.swing.SwingUtilities;
  */
 @SuppressWarnings("serial")
 public class Main extends JFrame {
-
-    private Item item;
-
-    private String itemName = "LED Monitor";
-    private String URL = "http://www.bestbuy.com/site/samsun-ue90-series-28-led-4k-uhd-moniotr-black/5484022.p?skuId=5484022";
-    private double maxPrice = 369.99;
-    private double minPrice = 61.67;
-    private double itemChange = 0.0;
-    private String itemDate = "08/25/2018";
 
     /** Default dimension of the dialog. */
     private final static Dimension DEFAULT_SIZE = new Dimension(400, 300);
@@ -49,13 +37,13 @@ public class Main extends JFrame {
     public Main(Dimension dim) {
         super("Price Watcher");
         setSize(dim);
-        this.item = new Item(itemName,URL,maxPrice,minPrice,itemChange,itemDate);
         configureUI();
         //setLocationRelativeTo(null);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setVisible(true);
         //setResizable(false);
         showMessage("Welcome!");
+
     }
 
     /** Callback to be invoked when the refresh button is clicked.
@@ -65,9 +53,9 @@ public class Main extends JFrame {
         //--
         //-- WRITE YOUR CODE HERE!
         //--
-        item.setPreviousPrice(item.getItemPrice());
-        item.setItemPrice(item.getRandomPrice());
-        item.setItemChange(item.change());
+        itemView.getItem().setPreviousPrice(itemView.getItem().getItemPrice());
+        itemView.getItem().setItemPrice(itemView.getItem().getRandomPrice());
+        itemView.getItem().setItemChange(itemView.getItem().change());
         super.repaint();
         showMessage("Refresh clicked!");
     }
@@ -79,6 +67,12 @@ public class Main extends JFrame {
         //--
         //-- WRITE YOUR CODE HERE!
         //--
+        try{
+            Desktop d = Desktop.getDesktop();
+            d.browse(new URI(itemView.getItem().getURL()));
+        }catch(Exception e){
+            e.printStackTrace();
+        }
 
         showMessage("View clicked!");
     }
@@ -94,7 +88,7 @@ public class Main extends JFrame {
                 BorderFactory.createEmptyBorder(10,16,0,16),
                 BorderFactory.createLineBorder(Color.GRAY)));
         board.setLayout(new GridLayout(1,1));
-        itemView = new ItemView(item);
+        itemView = new ItemView();
         itemView.setClickListener(this::viewPageClicked);
         board.add(itemView);
         add(board, BorderLayout.CENTER);

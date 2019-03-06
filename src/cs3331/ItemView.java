@@ -22,6 +22,23 @@ import java.net.URI;
 @SuppressWarnings("serial")
 public class ItemView extends JPanel {
 
+    private Item item;
+
+    private String itemName = "LED Monitor";
+    private String URL = "http://www.bestbuy.com/site/samsun-ue90-series-28-led-4k-uhd-moniotr-black/5484022.p?skuId=5484022";
+    private double maxPrice = 369.99;
+    private double minPrice = 61.67;
+    private double itemChange = 0.0;
+    private String itemDate = "08/25/2018";
+
+    public Item getItem() {
+        return item;
+    }
+
+    public void setItem(Item item) {
+        this.item = item;
+    }
+
     /** Interface to notify a click on the view page icon. */
     public interface ClickListener {
 
@@ -34,8 +51,6 @@ public class ItemView extends JPanel {
 
     /** View-page clicking listener. */
     private ClickListener listener;
-
-    private Item item;
 
     public ItemView(Item item) {
         this.item = item;
@@ -63,8 +78,12 @@ public class ItemView extends JPanel {
     /** Overridden here to display the details of the item. */
     @Override
     public void paintComponent(Graphics g) {
+        item = new Item(itemName,URL,maxPrice,minPrice,itemChange,itemDate);
+        int height = 25;
+        int width = 25;
         super.paintComponent(g);
         //Dimension dim = getSize();
+        g.drawImage(getImage("click.jpg"), 20, 5, height,width,null);
         int x = 20, y = 50;
         // g.drawImage(getImage("view.png"), x, y);
         g.drawString("Name: " + item.getItemName(), x, y);
@@ -83,7 +102,6 @@ public class ItemView extends JPanel {
         g.setColor(Color.BLACK);
         y += 20;
         g.drawString("Added: " + item.getItemDate(), x, y);
-        g.drawImage(getImage("image/click.jpg"), 40, 60, this);
     }
 
     /** Return true if the given screen coordinate is inside the viewPage icon. */
@@ -91,13 +109,7 @@ public class ItemView extends JPanel {
         //--
         //-- WRITE YOUR CODE HERE
         //--
-        try{
-            Desktop d = Desktop.getDesktop();
-            d.browse(new URI(item.getURL()));
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-        return new Rectangle(20, 20, 30, 20).contains(x,  y);
+        return new Rectangle(20, 5, 25, 25).contains(x,  y);
 
     }
 
